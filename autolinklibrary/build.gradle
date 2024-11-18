@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.panpf.bintray-publish'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 30
@@ -32,10 +33,10 @@ repositories {
 }
 
 publish {
-    userOrg = 'armcha'
-    groupId = 'com.github.armcha'
-    artifactId = 'AutoLinkTextViewV2'
+    userOrg = 'perfumic'
+    groupId = 'com.github.perfumic'
+    artifactId = 'PPAutoLinkTextView'
     publishVersion = '3.0.0'
-    desc = 'AutoLinkTextViewV2'
-    website = 'https://github.com/armcha/AutoLinkTextViewV2'
+    desc = 'PPAutoLinkTextView'
+    website = 'https://github.com/Perfumic/PPAutoLinkTextView'
 }
