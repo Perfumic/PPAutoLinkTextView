@@ -1,4 +1,4 @@
-package io.github.armcha.autolink
+package io.github.perfumic.autolink
 
 import android.text.Selection
 import android.text.Spannable

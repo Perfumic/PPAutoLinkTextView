@@ -1,4 +1,4 @@
-package io.github.armcha
+package io.github.perfumic
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -7,17 +7,21 @@ import android.text.style.TypefaceSpan
 import android.text.style.UnderlineSpan
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import io.github.armcha.autolink.*
-import kotlinx.android.synthetic.main.activity_static_text.*
+import io.github.perfumic.autolink.*
+import io.github.perfumic.databinding.ActivityStaticTextBinding
 
 class StaticTextActivity : AppCompatActivity() {
 
+    private lateinit var binding : ActivityStaticTextBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_static_text)
+        binding = ActivityStaticTextBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val custom = MODE_CUSTOM("\\sAndroid\\b", "\\smobile\\b")
-        autoLinkTextView.addAutoLinkMode(
+        binding.autoLinkTextView.addAutoLinkMode(
                 MODE_HASHTAG,
                 MODE_EMAIL,
                 MODE_URL,
@@ -25,11 +29,11 @@ class StaticTextActivity : AppCompatActivity() {
                 custom,
                 MODE_MENTION)
 
-        autoLinkTextView.addUrlTransformations(
+        binding.autoLinkTextView.addUrlTransformations(
                 "https://en.wikipedia.org/wiki/Wear_OS" to "Wear OS",
                 "https://en.wikipedia.org/wiki/Fire_OS" to "FIRE")
 
-        autoLinkTextView.attachUrlProcessor {
+        binding.autoLinkTextView.attachUrlProcessor {
             when {
                 it.contains("google") -> "Google"
                 it.contains("github") -> "Github"
@@ -37,19 +41,19 @@ class StaticTextActivity : AppCompatActivity() {
             }
         }
 
-        autoLinkTextView.addSpan(MODE_URL, StyleSpan(Typeface.ITALIC), UnderlineSpan())
-        autoLinkTextView.addSpan(MODE_HASHTAG, UnderlineSpan(), TypefaceSpan("monospace"))
-        autoLinkTextView.addSpan(custom, StyleSpan(Typeface.BOLD))
+        binding.autoLinkTextView.addSpan(MODE_URL, StyleSpan(Typeface.ITALIC), UnderlineSpan())
+        binding.autoLinkTextView.addSpan(MODE_HASHTAG, UnderlineSpan(), TypefaceSpan("monospace"))
+        binding.autoLinkTextView.addSpan(custom, StyleSpan(Typeface.BOLD))
 
-        autoLinkTextView.hashTagModeColor = ContextCompat.getColor(this, R.color.color5)
-        autoLinkTextView.phoneModeColor = ContextCompat.getColor(this, R.color.color3)
-        autoLinkTextView.customModeColor = ContextCompat.getColor(this, R.color.color1)
-        autoLinkTextView.mentionModeColor = ContextCompat.getColor(this, R.color.color6)
-        autoLinkTextView.emailModeColor = ContextCompat.getColor(this, R.color.colorPrimary)
+        binding.autoLinkTextView.hashTagModeColor = ContextCompat.getColor(this, R.color.color5)
+        binding.autoLinkTextView.phoneModeColor = ContextCompat.getColor(this, R.color.color3)
+        binding.autoLinkTextView.customModeColor = ContextCompat.getColor(this, R.color.color1)
+        binding.autoLinkTextView.mentionModeColor = ContextCompat.getColor(this, R.color.color6)
+        binding.autoLinkTextView.emailModeColor = ContextCompat.getColor(this, R.color.colorPrimary)
 
-        autoLinkTextView.text = getString(R.string.android_text)
+        binding.autoLinkTextView.text = getString(R.string.android_text)
 
-        autoLinkTextView.onAutoLinkClick {
+        binding.autoLinkTextView.onAutoLinkClick {
             val message = if (it.originalText == it.transformedText) it.originalText
             else "Original text - ${it.originalText} \n\nTransformed text - ${it.transformedText}"
             val url = if (it.mode is MODE_URL) it.originalText else null

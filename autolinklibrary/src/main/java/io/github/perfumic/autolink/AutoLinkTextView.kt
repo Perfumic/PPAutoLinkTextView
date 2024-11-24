@@ -1,4 +1,4 @@
-package io.github.armcha.autolink
+package io.github.perfumic.autolink
 
 import android.content.Context
 import android.graphics.Color

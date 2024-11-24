@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.panpf.bintray-publish'
 apply plugin: 'maven-publish'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    namespace = "io.github.perfumic.autolink"
+    compileSdkVersion 35
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion 21
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
     }
@@ -28,17 +27,27 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.core:core-ktx:1.15.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 repositories {
     mavenCentral()
 }
-
-publish {
-    userOrg = 'perfumic'
-    groupId = 'com.github.perfumic'
-    artifactId = 'PPAutoLinkTextView'
-    publishVersion = '3.0.0'
-    desc = 'PPAutoLinkTextView'
-    website = 'https://github.com/Perfumic/PPAutoLinkTextView'
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+    }
 }
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.perfumic'
+            artifactId = 'PPAutoLinkTextView'
+            version = '3.0.0'
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}
+

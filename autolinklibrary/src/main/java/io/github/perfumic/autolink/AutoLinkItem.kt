@@ -1,4 +1,4 @@
-package io.github.armcha.autolink
+package io.github.perfumic.autolink
 
 data class AutoLinkItem(var startPoint: Int,
                         var endPoint: Int,
