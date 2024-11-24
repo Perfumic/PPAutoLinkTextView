@@ -40,7 +40,7 @@ kotlin {
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = 'com.github.perfumic'
+            groupId = 'com.github.Perfumic'
             artifactId = 'PPAutoLinkTextView'
             version = '3.0.0'
 
